@@ -55,7 +55,7 @@ export default class ChatList extends Component {
         let { chats } = this.state;
         let chatsArray = chats.map((chat, index) => {
             let { name, messages } = chat;
-            return <Chat name = { name } messages = { messages } key = { index } id = { this.props.id + index } />
+            return <Chat name = { name } messages = { messages } key = { index } id = { this.props.id + index} />
         });
 
         return (
