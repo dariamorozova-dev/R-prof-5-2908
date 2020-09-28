@@ -7,42 +7,32 @@ import ChatsDialog from '../ChatsDialog/ChatsDialog.jsx';
 import List from '@material-ui/core/List';
 import Item from '../ChatListItem/ChatListItem.jsx';
 
+import { addChatToList } from '../../store/actions/chats-actions';
+
 // import Chat from '../Chat/Chat.jsx';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 class ChatList extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-            
-    //         addFunc: this.addChat.bind(this),
-    //     }
-        
-    // }
+    add = (name) => {
+        this.props.addChatToList(name);
+    }
     
 
-    addChat = (name) => {
-        this.setState({
-            chats: [...this.props.chats, {
-                    name: name,
-                    messages: '0 messages',
-                }
-            ],
-        });
-        console.log('chat was added to the list');
+    // addChat = (name) => {
+    //     this.setState({
+    //         chats: [...this.props.chats, {
+    //                 name: name,
+    //                 messages: '0 messages',
+    //             }
+    //         ],
+    //     });
+    //     console.log('chat was added to the list');
         
-    }
+    // }
 
     render() {
-        
-        // let { chats } = this.state;
-        // let chatsArray = chats.map((chat, index) => {
-        //     let { name, messages } = chat;
-        //     return <Chat name = { name } messages = { messages } key = { index } id = { this.props.id + index } />
-        // });
-
         let {chats} = this.props; 
 
         let linksArr = chats.map(ch =>  
@@ -51,22 +41,13 @@ class ChatList extends Component {
             </Link>)
 
         return (
-            // <Fragment>
-            //     <div className="chatList d-flex flex-column">
-
-            //         { chatsArray }
-            //         <div>
-            //             <ChatsDialog addFunction={ this.state.addFunc } />
-            //         </div>
-            //     </div>
-            // </Fragment>
             <Fragment>
                 <div className="ChatList d-flex flex-column">
                     <List>
                         { linksArr }
                     </List>
                     <div>
-                        <ChatsDialog addFunction={ this.addChat }/>
+                        <ChatsDialog addFunction={ this.add }/>
                     </div>
                 </div>
             </Fragment>
@@ -78,6 +59,6 @@ const mapStateToProps = ({ chatReducer }) => ({
     chats: chatReducer.chats
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ addChatToList }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatList);

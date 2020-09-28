@@ -10,7 +10,7 @@ import  { sendMessage } from '../../store/actions/messages-actions';
 // export default 
 class MainField extends Component {
 
-    send = (text, sender = 'me') => {
+    send = (text, sender = 'Me') => {
         this.props.sendMessage(text, sender);
     }
 
@@ -43,7 +43,6 @@ const mapStateToProps = ({ msgReducer }) => ({
     messages: msgReducer.messages
 })
 
-//где? мапдиспатчтупропс?
 const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainField);
